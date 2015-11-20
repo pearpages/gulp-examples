@@ -61,7 +61,7 @@ The tasks can be
 * a callback function with an event objec {type: ..., path: ...}
 
 ```javascript
-gulp.watch('./src/**/*.js', ['jshint, 'jscs']);
+gulp.watch('./src/**/*.js', ['jshint', 'jscs']);
 ```
 
 ```javascript
