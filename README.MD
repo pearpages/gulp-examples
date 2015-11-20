@@ -40,6 +40,19 @@ Therefore:
 * Deliver Faster
 * Repeatable and Consistent
 
-## Automated Pipeline
+### Automated Pipeline
 
 Develop > Analyze > Test > Build > Deploy
+
+## Gulp Passes Files Through a Stream
+
+* Start with a source set of files
+* Process or examine the files
+* Send output to a desitnation
+
+## Gulp APIS
+
+1. gulp.task
+2. gulp.src
+3. gulp.dest
+4. gulp.watch
