@@ -56,3 +56,10 @@ Develop > Analyze > Test > Build > Deploy
 2. gulp.src
 3. gulp.dest
 4. gulp.watch
+
+## Libaries
+
+* JSHint (Detect errors and potential problems)
+* JSCS (Code Style Checker: enforcing your style guide)
+
+For these two we use **.jshintrc** and **.jscrc**
