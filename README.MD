@@ -2,6 +2,13 @@
 
 ## Why Gulp?
 
+### Characteristics
+
+* Code over configuration
+* Stream based
+* 1100+ plugins
+* Use node more readily
+
 ### Gulp Streams
 
 * Minification
@@ -21,3 +28,18 @@
 * Testing
 * Development
 
+### Automate Tasks
+
+* Code Quality
+* Tests
+* Build Pipeline
+
+Therefore:
+
+* Improve quality
+* Deliver Faster
+* Repeatable and Consistent
+
+## Automated Pipeline
+
+Develop > Analyze > Test > Build > Deploy
