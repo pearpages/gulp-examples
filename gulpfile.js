@@ -22,11 +22,11 @@
             './src/**/*.js',
             './*.js'
         ])
-        .pipe(gulpif(args.verbose, gulpPrint()))
-        .pipe(jscs())
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish', {verbose:true}))
-        .pipe(jshint.reporter('fail'));
+        .pipe($.if(args.verbose, gulpPrint()))
+        .pipe($.jscs())
+        .pipe($.jshint())
+        .pipe($.jshint.reporter('jshint-stylish', {verbose:true}))
+        .pipe($.jshint.reporter('fail'));
     });
 
     /* Helpers */
@@ -35,11 +35,11 @@
         if (typeof(msg) === 'object') {
             for (var item in msg) {
                 if (msg.hasOwnProperty(item)) {
-                    util.log(util.colors.blue(msg[item]));
+                    $.util.log($.util.colors.blue(msg[item]));
                 }
             }
         } else {
-            util.log(util.colors.blue(msg));
+            util.log($.util.colors.blue(msg));
         }
     }
 }());
