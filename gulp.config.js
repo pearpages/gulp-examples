@@ -1,5 +1,6 @@
 module.exports = function() {
     var client = './src/client/';
+    var clientApp = client + 'app/'
 
     var config = {
         temp: './.tmp/',
@@ -12,6 +13,13 @@ module.exports = function() {
         alljs: [
             './src/**/*.js',
             './*.js'
+        ],
+        index: client + 'index.html',
+        //! is for excluding
+        js: [
+            clientApp + '**/*.module.js',
+            clientApp + '**/*.js',
+            '!' + clientApp + '**/*.spec.js'
         ],
 
         less: client + 'styles/styles.less'
