@@ -4,6 +4,7 @@
     var config = require('./gulp.config')();
     var $ = require('gulp-load-plugins')({lazy: true}); // load on demand al gulp plugins
 
+    //I keep the comments as an example
     // var jshint = require('gulp-jshint'); //code correctness
     // var jscs = require('gulp-jscs'); //code structure
     // var util = require('gulp-util');
@@ -34,6 +35,11 @@
             .pipe($.less())
             .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
             .pipe(gulp.dest(config.temp));
+    });
+
+    gulp.task('clean-styles', function() {
+        var files = config.temp + '**/*.css';
+        del(files); //nde package
     });
 
     /* Helpers */
