@@ -72,12 +72,42 @@ gulp.task('styles', funciton() {
 
     return gulp
     .src(config.less) //in gulp.config.js
-    .pipe($.plumber())
+    .pipe($.plumber()) //errors
     .pipe($.less())
     .pipe($.autoprefixer({
         browsers: ['last 2 version', '> 5%']
     }))
-    .pipe(gul.dest(config.temp)) //in gulp.config.js
+    .pipe(gulp.dest(config.temp)) //in gulp.config.js
 
     });
 ```
+
+## HTML Injection
+
+* wiredep
+* gulp-inject
+
+```bash
+npm install wirdep gulp-inject --save-dev
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<!-- bower:css -->
+<!-- endbower -->
+
+<!-- inject:css -->
+<!-- endinject -->
+    <title></title>
+</head>
+<body>
+    <!-- bower:js -->
+    <!-- endbower -->
+
+    <!-- inject:js -->
+    <!-- endinject -->
+</body>
+</html>
+``

@@ -50,6 +50,17 @@
         gulp.watch([config.less], ['styles']);
     });
 
+    gulp.task('wiredep', function() {
+        var options = config.getWiredepDefaultOptions();
+        var wiredep = require('wiredep').stream; //.stream is to use it with gulp
+
+        return gulp
+            .src(config.index)
+            .pipe(wiredep(options))
+            .pipe($.inject(gulp.src(config.js)))
+            .pipe(gulp.dest(config.client));
+    });
+
     /* Helpers */
 
     // Not loger used bc we use plumber
