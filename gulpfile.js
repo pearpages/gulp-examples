@@ -2,6 +2,7 @@
     var gulp = require('gulp');
     var args = require('yargs').argv;
     var config = require('./gulp.config')();
+    var del = require('del');
     var $ = require('gulp-load-plugins')({lazy: true}); // load on demand al gulp plugins
 
     //I keep the comments as an example
@@ -27,7 +28,8 @@
         .pipe($.jshint.reporter('fail'));
     });
 
-    gulp.task('styles', function() {
+    gulp.task('styles', ['clean-styles'], function() {
+        //clean-styles, as a dependency, runs b4 styles @ see clean-styles task
         log('Compliling Less --> CSS');
 
         return gulp
@@ -37,12 +39,17 @@
             .pipe(gulp.dest(config.temp));
     });
 
-    gulp.task('clean-styles', function() {
+    gulp.task('clean-styles', function(done) { //we create a callback done to make sure we clean-styles first
         var files = config.temp + '**/*.css';
-        del(files); //nde package
+        clean(files, done);
     });
 
     /* Helpers */
+
+    function clean (path) {
+        log('Cleaning: ' + $.util.colors.blue(path));
+        del(path, done); //node package
+    }
 
     function log(msg) {
         if (typeof(msg) === 'object') {
