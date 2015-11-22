@@ -3,11 +3,8 @@ module.exports = function() {
     var clientApp = client + 'app/'
 
     var config = {
+        client: client,
         temp: './.tmp/',
-
-        /**
-         * Files paths
-         */
 
         //all js to vet
         alljs: [
@@ -22,8 +19,28 @@ module.exports = function() {
             '!' + clientApp + '**/*.spec.js'
         ],
 
-        less: client + 'styles/styles.less'
+        less: client + 'styles/styles.less',
+
+        /**
+         * Bower and NPM locations
+         */
+        bower: {
+            json: require('./bower.json'),
+            directory: './bower_components/',
+            ignorePath: '../..'
+        },
+        getWiredDefaultOptions: getWiredDefaultOptions
     };
+
+    function getWiredDefaultOptions() {
+        var options = {
+            bowerJson: config.bower.json,
+            directory: config.bower.directory,
+            ignorePath: config.bower.ignorePath
+        };
+
+        return options;
+    }
 
     return config;
 };
