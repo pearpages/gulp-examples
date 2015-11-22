@@ -63,3 +63,10 @@ Develop > Analyze > Test > Build > Deploy
 * JSCS (Code Style Checker: enforcing your style guide)
 
 For these two we use **.jshintrc** and **.jscrc**
+
+## More about Gulp
+
+* Plugins (Define what tasks do)
+* Node (Not limited to Gulp packages)
+* Functions (Reusing logic)
+* Config (Extendability)
