@@ -34,7 +34,9 @@
 
         return gulp
             .src(config.less)
+            .pipe($.plumber()) //plumber deals with errors and stops execusion
             .pipe($.less())
+            //.on('error', errorLogger) // not longer uesd, bc we use plumber
             .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
             .pipe(gulp.dest(config.temp));
     });
@@ -44,7 +46,20 @@
         clean(files, done);
     });
 
+    gulp.task('less-watcher', function() {
+        gulp.watch([config.less], ['styles']);
+    });
+
     /* Helpers */
+
+    // Not loger used bc we use plumber
+    // function errorLogger(error) {
+    //     // we've defined the log function which uses gulp-util.log
+    //     log('*** Start of Error ***');
+    //     log(error);
+    //     log('*** End of Error ***');
+    //     this.emit('end'); //ends the pipe
+    // }
 
     function clean (path) {
         log('Cleaning: ' + $.util.colors.blue(path));

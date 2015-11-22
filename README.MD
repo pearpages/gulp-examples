@@ -64,9 +64,20 @@ Develop > Analyze > Test > Build > Deploy
 
 For these two we use **.jshintrc** and **.jscrc**
 
-## More about Gulp
+## Examples
 
-* Plugins (Define what tasks do)
-* Node (Not limited to Gulp packages)
-* Functions (Reusing logic)
-* Config (Extendability)
+```javascript
+gulp.task('styles', funciton() {
+    log('Compiling Less --> CSS'); //self made function
+
+    return gulp
+    .src(config.less) //in gulp.config.js
+    .pipe($.plumber())
+    .pipe($.less())
+    .pipe($.autoprefixer({
+        browsers: ['last 2 version', '> 5%']
+    }))
+    .pipe(gul.dest(config.temp)) //in gulp.config.js
+
+    });
+```
