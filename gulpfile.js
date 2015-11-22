@@ -1,13 +1,13 @@
 (function () {
     var gulp = require('gulp');
     var args = require('yargs').argv;
-
-    var $ = require('gulp-load-plugins')({lazy: true}); // load on demand
+    var config = require('./gulp.config')();
+    var $ = require('gulp-load-plugins')({lazy: true}); // load on demand al gulp plugins
 
     // var jshint = require('gulp-jshint'); //code correctness
     // var jscs = require('gulp-jscs'); //code structure
     // var util = require('gulp-util');
-    // var gulpPrint = require('gulp-print'); //show all t he files we are 'touching'
+    // var gulpPrint = require('gulp-print'); //show all t he files we are 'touching' in the command line
     // var gulpif = require('gulp-if'); //for conditionals statements
 
     gulp.task('hello-world', function() {
@@ -18,11 +18,8 @@
         log('Analyzing source with JSHint and JSCS');
 
         //all the source code + the root js files
-        gulp.src([
-            './src/**/*.js',
-            './*.js'
-        ])
-        .pipe($.if(args.verbose, gulpPrint()))
+        gulp.src(config.alljs)
+        .pipe($.if(args.verbose, $.print()))
         .pipe($.jscs())
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish', {verbose:true}))
@@ -39,7 +36,7 @@
                 }
             }
         } else {
-            util.log($.util.colors.blue(msg));
+            $.util.log($.util.colors.blue(msg));
         }
     }
 }());
