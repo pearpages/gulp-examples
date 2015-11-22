@@ -111,3 +111,18 @@ npm install wirdep gulp-inject --save-dev
 </body>
 </html>
 ```
+
+```javascript
+gulp.task('wiredep', function() {
+    log('Wiring the bower dependencies into the html'); //self made function
+
+    var wiredep = require('wiredep').steam;
+    var options = config.getWiredepDefaultOptions();
+
+    return gulp
+        .src(config.index)
+        .pipe(wiredep(options))
+        .pipe($.inject(gulp.src(config.js)))
+        .pipe(gulp.dest(config.client))
+});
+```
