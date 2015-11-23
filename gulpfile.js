@@ -33,13 +33,13 @@
         log('Compliling Less --> CSS');
 
         return gulp
-            .src(config.less)
+        .src(config.less)
             .pipe($.plumber()) //plumber deals with errors and stops execusion
             .pipe($.less())
             //.on('error', errorLogger) // not longer uesd, bc we use plumber
             .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
             .pipe(gulp.dest(config.temp));
-    });
+        });
 
     gulp.task('clean-styles', function(done) { //we create a callback done to make sure we clean-styles first
         var files = config.temp + '**/*.css';
@@ -55,10 +55,10 @@
         var wiredep = require('wiredep').stream; //.stream is to use it with gulp
 
         return gulp
-            .src(config.index)
-            .pipe(wiredep(options))
-            .pipe($.inject(gulp.src(config.js)))
-            .pipe(gulp.dest(config.client));
+        .src(config.index)
+        .pipe(wiredep(options))
+        .pipe($.inject(gulp.src(config.js)))
+        .pipe(gulp.dest(config.client));
     });
 
     gulp.task('serve-dev', ['inject'], function() {
@@ -75,19 +75,23 @@
         };
 
         return $.nodemon(nodeOptions)
-            .on('restart', function() {
+        .on('restart', function() {
                 //
             })
-            .on('start', function() {
-                log('*** nodemon started ***');
-                startBrowserSync();
-            })
-            .on('crash', function() {
+        .on('start', function() {
+            log('*** nodemon started ***');
+            startBrowserSync();
+        })
+        .on('crash', function() {
                 //
             })
-            .on('exit', function() {
+        .on('exit', function() {
                 //
             });
+    });
+
+    gulp.task('less-watcher', function() {
+        gulp.watch([config.less], ['styles']);
     });
 
     /* Helpers */
@@ -100,6 +104,11 @@
     //     log('*** End of Error ***');
     //     this.emit('end'); //ends the pipe
     // }
+
+    function changeEvent(event) {
+        var srcPattern = new RegExp('/.*(?=/' + config.source + ')/');
+        log('File ' + event.path.replace(srcPattern, '') + ' ' + event.type);
+    }
 
     function clean (path) {
         log('Cleaning: ' + $.util.colors.blue(path));
@@ -125,10 +134,19 @@
 
         log('Starting browser-sync on port ' + port);
 
+        gulp.watch([config.less], ['styles'])
+            .on('change', function(event) {
+                changeEvent(event);
+            });
+
         var options = {
             proxy: 'localhost' + port,
             port: 3000,
-            files: [config.client + '**/*.*'],
+            files: [
+            config.client + '**/*.*',
+            '!' + config.less,
+            config.temp + '**/*.cs'
+            ],
             ghostMode: {
                 clicks: true,
                 location: false,
