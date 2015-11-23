@@ -149,7 +149,7 @@ gulp.task('inject', ['wiredep', 'styles'], function() {
 }
 ```
 
-## Serve-dev
+## Seve-dev (node-server)
 
 ```javascript
     gulp.task('serve-dev', ['inject'], function() {
@@ -180,3 +180,13 @@ gulp.task('inject', ['wiredep', 'styles'], function() {
             });
     });
 ```
+
+## BrowserSync
+
+* Inject file changes
+* Synchronize actions across browsers
+    - Click
+    - Form
+    - Location
+    - Scroll
+
