@@ -38,6 +38,11 @@ module.exports = function() {
         defaultPort: 7203,
         nodeServer: './src/server/app.js',
 
+        /**
+         * browserSync
+         */
+        browserReloadDelay: 1000,
+
         getWiredDefaultOptions: getWiredDefaultOptions
     };
 

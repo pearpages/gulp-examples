@@ -76,8 +76,11 @@
 
         return $.nodemon(nodeOptions)
         .on('restart', function() {
-                //
-            })
+            setTimeout(function() {
+                browserSync.notify('reloading noew...');
+                browserSyng.reload({stream:false});
+            }, config.browserRelodDelay);
+        })
         .on('start', function() {
             log('*** nodemon started ***');
             startBrowserSync();
@@ -128,7 +131,7 @@
     }
 
     function startBrowserSync() {
-        if (browserSync.active) {
+        if (args.nosync || browserSync.active) {
             return;
         }
 
