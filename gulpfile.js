@@ -3,14 +3,13 @@
     var args = require('yargs').argv;
     var config = require('./gulp.config')();
     var del = require('del');
-    var $ = require('gulp-load-plugins')({lazy: true}); // load on demand al gulp plugins
-
-    //I keep the comments as an example
+    //I keep the comments as an example but they get loaded now with 'gulp-load-plugins'
     // var jshint = require('gulp-jshint'); //code correctness
     // var jscs = require('gulp-jscs'); //code structure
     // var util = require('gulp-util');
     // var gulpPrint = require('gulp-print'); //show all t he files we are 'touching' in the command line
     // var gulpif = require('gulp-if'); //for conditionals statements
+    var $ = require('gulp-load-plugins')({lazy: true}); // load on demand al gulp plugins
 
     gulp.task('hello-world', function() {
         console.log('My first gulp task!');
@@ -75,10 +74,18 @@
         };
 
         return $.nodemon(nodeOptions)
-            .on('restart', function() {})
-            .on('start', function() {})
-            .on('crash', function() {})
-            .on('exit', function() {});
+            .on('restart', function() {
+                //
+            })
+            .on('start', function() {
+                //
+            })
+            .on('crash', function() {
+                //
+            })
+            .on('exit', function() {
+                //
+            });
     });
 
     /* Helpers */
