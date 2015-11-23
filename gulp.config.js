@@ -1,10 +1,11 @@
 module.exports = function() {
     var client = './src/client/';
-    var clientApp = client + 'app/'
+    var clientApp = client + 'app/';
+    var server = './src/server/';
+    var temp = './.tmp/';
 
     var config = {
         client: client,
-        temp: './.tmp/',
 
         //all js to vet
         alljs: [
@@ -20,6 +21,8 @@ module.exports = function() {
         ],
 
         less: client + 'styles/styles.less',
+        server: server,
+        temp: temp,
 
         /**
          * Bower and NPM locations
@@ -29,6 +32,12 @@ module.exports = function() {
             directory: './bower_components/',
             ignorePath: '../..'
         },
+        /**
+         * Node Settings
+         */
+        defaultPort: 7203,
+        nodeServer: './src/server/app.js',
+
         getWiredDefaultOptions: getWiredDefaultOptions
     };
 

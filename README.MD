@@ -84,8 +84,9 @@ gulp.task('styles', funciton() {
 
 ## HTML Injection
 
-* wiredep
-* gulp-inject
+* wiredep: Gather the bower files and inject into HTML
+* gulp-inject: Inject CSS into HTML
+* post install script: Run wiredep after bower install
 
 ```bash
 npm install wirdep gulp-inject --save-dev
@@ -146,4 +147,36 @@ gulp.task('inject', ['wiredep', 'styles'], function() {
         "postinstall": "gulp wiredep"
     }
 }
+```
+
+## Serve-dev
+
+```javascript
+    gulp.task('serve-dev', ['inject'], function() {
+        var isDev = true;
+
+        var nodeOptions = {
+            script: config.nodeServer,
+            delayTime: 1,
+            env: {
+                'PORT': port,
+                'NODE_ENV': isDev ? 'dev' : 'build'
+            },
+            watch: [config.server]
+        };
+
+        return $.nodemon(nodeOptions)
+            .on('restart', function() {
+                //
+            })
+            .on('start', function() {
+                //
+            })
+            .on('crash', function() {
+                //
+            })
+            .on('exit', function() {
+                //
+            });
+    });
 ```
