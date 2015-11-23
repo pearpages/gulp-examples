@@ -1,6 +1,7 @@
 (function () {
     var gulp = require('gulp');
     var args = require('yargs').argv;
+    var browserSync = require('browser-sync');
     var config = require('./gulp.config')();
     var del = require('del');
     //I keep the comments as an example but they get loaded now with 'gulp-load-plugins'
@@ -78,7 +79,8 @@
                 //
             })
             .on('start', function() {
-                //
+                log('*** nodemon started ***');
+                startBrowserSync();
             })
             .on('crash', function() {
                 //
@@ -114,5 +116,31 @@
         } else {
             $.util.log($.util.colors.blue(msg));
         }
+    }
+
+    function startBrowserSync() {
+        if (browserSync.active) {
+            return;
+        }
+
+        log('Starting browser-sync on port ' + port);
+
+        var options = {
+            proxy: 'localhost' + port,
+            port: 3000,
+            files: [config.client + '**/*.*'],
+            ghostMode: {
+                clicks: true,
+                location: false,
+                forms: true,
+                scroll: true
+            },
+            injectChanges: true,
+            logFileChanges: true,
+            logLevel: 'debug',
+            logPrefix: 'gulp-patterns',
+            notify: true,
+            reloadDelay: 1000
+        };
     }
 }());
